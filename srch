@@ -1,0 +1,90 @@
+#linear sentinel binary fibonacci students training program
+def Input():
+    global R,key,n
+    R=[]
+    n=int(input("Enter the total number of students who attended the training program "))
+    for i in range (n):
+        x=int(input("Enter the roll no of students "))
+        R.append(x)
+
+    key=int(input("Enter the key to search "))
+def linear():
+    flag=0
+    for i in R:
+        if i==key:
+            flag=1
+            break
+    if flag==1:
+        print("Element present")
+    else:
+        print("Element Absent")
+
+def sentinel():
+
+    temp=R
+    temp.append(key)
+    i=0
+    while(R[i]!=key):
+        i=i+1
+    if i<n:
+        print("Element present ")
+    else:
+        print("element Absent")
+
+def binary():
+    global low,high,mid,temp
+    temp=[]
+    temp=sorted(R)
+    low=0
+    high=n-1
+    
+    flag=0
+    while(low<=high):
+        mid=(low+high)//2
+        if (temp[mid]==key):
+            flag=1
+            break
+        elif (key<temp[mid]):
+            high=mid-1
+        else :
+            low=mid+1
+    if flag==1:
+        print("Element Present")
+    else:
+        print("element absent ")
+
+def fibonacci():
+    temp=sorted(R)
+    f1=0
+    f2=1
+    fn=f1+f2
+    offset=-1
+    i=0
+    while (f2!=0):
+        i=min((offset+f1),n-1)
+        if (key>temp[i]):
+            fn=f2
+            f2=f1
+            f1=fn-f2
+            offset=i
+        elif(key<temp[i]):
+            fn=f1
+            f2=f2-f1
+            f1=fn-f2
+        elif(key==temp[i]):
+            print("Element present")
+            break
+    else:
+        print("Absent")
+
+
+
+
+
+Input()
+linear()
+sentinel()
+binary()
+fibonacci()
+
+
