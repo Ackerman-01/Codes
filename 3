@@ -1,0 +1,45 @@
+def Input():
+    global M,n
+    n=int(input("Enter the total number of students "))
+    
+    M=[]
+    for i in range (1,n+1):
+        m=int(input("ENter the marrks of students (if absent enter -1)"))
+        M.append(m)
+
+def avg():
+    Avg=0
+    sum=0
+    for i in M:
+        sum=sum+i
+
+    Avg=sum/n
+    print("Average of students is ",Avg)
+
+def highandlow():
+    high=0
+    
+    for x in M:
+        if x>high:
+            high=x
+
+    low=high
+    for x in M:
+        if x<low and x!=-1:
+            low=x
+
+    print("Highest marks ",high)
+    print("Lowest Marks ",low)
+
+def absent():
+    count=0
+    for x in M:
+        if x==-1:
+            count=count+1
+    
+    print("Count of students absent for test is ",count)
+
+Input()
+avg()
+highandlow()
+absent()
