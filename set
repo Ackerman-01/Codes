@@ -1,0 +1,98 @@
+def Input():
+    global U,A,B,C
+    U=[1,2,3,4,5,6,7,8,9,10]
+    A=[]
+    B=[]
+    C=[]
+    a=int(input("Enter the total no of students that like cricket"))
+    for i in range (a):
+        aa=int(input("EEntter the roll no of student "))
+        A.append(aa)
+
+
+    b=int(input("Enter the total no of students that like Badminton"))
+    for i in range (b):
+        bb=int(input("EEntter the roll no of student "))
+        B.append(bb)
+
+    c=int(input("Enter the total no of students that like Football"))
+    for i in range (c):
+        cc=int(input("EEntter the roll no of student "))
+        C.append(cc)
+
+def AuB():
+    global AUB
+    AUB=[]
+    for a in A:
+        AUB.append(a)
+    for x in A:
+        
+        for y in B:
+            flag=0
+            if x==y:
+                flag=1
+                break
+        if flag==0:
+            AUB.append(y)
+        break
+    print(AUB)
+
+def bothcric_badminton():
+    global AandB
+    
+    AandB=[]
+    for x in A:
+        for y in B:
+            if x==y:
+                AandB.append(y)
+        
+    print("Both cricket and badminton ",AandB)
+
+def CricorBad():
+    AorB=[]
+    for x in AUB:
+        flag=0
+        for y in AandB:
+            if x==y:
+                flag=1
+                break
+        if flag==0:
+            AorB.append(x)
+    
+    print ("Either cricket or badminton ",AorB)
+
+def NCNB():
+    global ncnb
+    ncnb=[]
+    for x in U:
+        flag=0
+        for y in AUB:
+            if x==y:
+                flag=1
+        if flag==0:
+            ncnb.append(x)
+    print("Neither Cricket nor Badminton ",ncnb)
+
+def CandFnotB():
+    AnC=[]
+    for x in A:
+        for y in C:
+            if x==y:
+                AnC.append(x)
+    
+    ACnB=[]
+    for x in AnC:
+        flag=0
+        for  y in B:
+            if x==y:
+                flag=1
+        if flag==0:
+            ACnB.append(x)
+    print ("Cricket and football not badminton ",ACnB)
+
+Input()
+AuB()
+bothcric_badminton()
+CricorBad()
+NCNB()
+CandFnotB()
