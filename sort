@@ -1,0 +1,68 @@
+def Input():
+    global A,n,p
+
+    A=[]
+    n=int(input("enter the total no of students "))
+    for i in range(n):
+        p=float(input("Enter percentage of students "))
+        A.append(p)
+        
+def selection():
+    global min_ind,i
+    i=0
+    for i in range(n):
+        min_ind=i
+        for j in range(i+1,n):
+            if (A[j]<A[min_ind]): #
+                min_ind=j
+        (A[i],A[min_ind])=(A[min_ind],A[i])
+
+    for i in A:
+        print(i)
+
+def bubble():
+    
+    for i in range(n):
+        for j in range(0,n-i-1): #last element is left out
+            if A[j]>A[j+1]:
+                A[j],A[j+1]=A[j+1],A[j] #swapping mechanism
+
+    print("The top 5 scores are ")       
+    print(A[-5:])    #rreverse this list if asked in descending order
+
+def quicksort():
+
+    
+    def partition(A,low,high):  # returns the pos of pivot element 
+        i=low
+        j=high-1
+        pivot=A[high] #here last element is pivot
+
+        while i<j:                            #while loop checks if i and j cross each other
+            while i<high and A[i]<pivot:
+                i=i+1                         #moves i to right
+            while j>low and A[j]>=pivot:
+                j=j-1                         #moves j to left
+            if i<j:
+                A[i],A[j]=A[j],A[i]           #Swaps the ith and jth element if i and j havent crossed
+                
+                           
+        if A[i]>pivot:                 #when i crosses j, ith element is swapped with pivot 
+            A[i],A[high]=A[high],A[i]
+        return i                        #return i for quick() function to determine the position to split array
+    def quick(A,low,high):
+        if low<high:
+            p=partition(A,low,high)
+            quick(A,p+1,high) #sublist > pivot
+            quick(A,low,p-1) #sublist < pivot
+
+    
+    size=len(A)
+
+    quick(A,0,size-1)
+    print(A)
+    
+    
+    
+Input()
+quicksort()
