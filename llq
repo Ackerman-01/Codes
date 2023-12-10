@@ -1,0 +1,72 @@
+#include<iostream>
+using namespace std;
+struct node{
+    int no;
+    node *next;
+};
+
+class Queue
+{
+    node *front, *rear;
+    public:
+    Queue()
+    {
+        front=rear=nullptr;
+    }
+    void insert()
+    {
+        node *nn=new node;
+        cout<<"Enter the job number";
+        cin>>nn->no;
+        nn->next=nullptr;
+        if (front == nullptr) 
+        {
+            front = rear = nn;
+        }
+        else
+        {
+            rear->next=nn;
+            rear=nn;
+        }
+        cout<<"Job added to queue";
+
+    }
+    void Delete()
+    {   if (front == nullptr) {
+            cout << "Queue is empty. No job to delete.\n";
+            return;
+        }
+
+        int no=front->no;
+        node* temp=front;
+        front=front->next;
+        if (front==nullptr)
+        {
+            rear=nullptr;
+        }
+        delete temp;
+        cout<<"Job deleted";
+
+    }
+    void display()
+    {
+        
+        node* temp;
+        temp=front;
+        while(temp!=nullptr)
+        {
+            cout<<temp->no<<endl;
+            temp=temp->next;
+        }
+    }
+
+};
+
+int main()
+{
+    Queue q;
+    q.insert();
+    q.insert();
+    q.display();
+    q.Delete();
+}
