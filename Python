@@ -1,0 +1,53 @@
+import tkinter as tk
+from tkinter import messagebox
+import pandas as pd
+
+class StudentDatabaseApp:
+    def __init__(self, root):
+        self.root = root
+        self.root.title("Student Database Management System")
+        
+        # Labels and Entry fields
+        tk.Label(root, text="Name:").grid(row=0, column=0, padx=5, pady=5)
+        self.name_entry = tk.Entry(root)
+        self.name_entry.grid(row=0, column=1, padx=5, pady=5)
+
+        tk.Label(root, text="Branch:").grid(row=1, column=0, padx=5, pady=5)
+        self.branch_entry = tk.Entry(root)
+        self.branch_entry.grid(row=1, column=1, padx=5, pady=5)
+
+        tk.Label(root, text="Year:").grid(row=2, column=0, padx=5, pady=5)
+        self.year_entry = tk.Entry(root)
+        self.year_entry.grid(row=2, column=1, padx=5, pady=5)
+
+        # Submit button
+        tk.Button(root, text="Submit", command=self.add_student).grid(row=3, column=0, columnspan=2, pady=10)
+
+    def add_student(self):
+        # Get student details from entry fields
+        name = self.name_entry.get()
+        branch = self.branch_entry.get()
+        year = self.year_entry.get()
+
+        # Check if all fields are filled
+        if name and branch and year:
+            # Create DataFrame to store student details
+            student_data = pd.DataFrame({'Name': [name], 'Branch': [branch], 'Year': [year]})
+
+            # Append student details to CSV file
+            with open('student_database.csv', 'a') as f:
+                student_data.to_csv(f, header=f.tell()==0, index=False)
+            
+            # Clear entry fields after submission
+            self.name_entry.delete(0, 'end')
+            self.branch_entry.delete(0, 'end')
+            self.year_entry.delete(0, 'end')
+
+            messagebox.showinfo("Success", "Student details added successfully!")
+        else:
+            messagebox.showerror("Error", "Please fill in all fields.")
+
+if __name__ == "__main__":
+    root = tk.Tk()
+    app = StudentDatabaseApp(root)
+    root.mainloop()
